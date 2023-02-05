@@ -34,8 +34,8 @@ def get_input_autodesk():
     user_info = {
       "email Autodesk": emailADSK,
       "password Autodesk": passwordADSK,
-      "email Outlook": emailADSK,
-      "password Outlook": passwordADSK
+      "email Outlook": emailOutlook,
+      "password Outlook": passwordOutlook
     }
     root.destroy()
     if root.destroy : True 
