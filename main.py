@@ -77,6 +77,8 @@ def get_input_autodesk():
 
     print("Connecting to Outlook and downloading report...")
 
+    #Outlook
+
     driver.maximize_window()
     driver.get("https://outlook.office365.com/mail/AAMkADNjMDFhMDljLTcxNDItNDU1My04ZWJkLWE3MjY3YzQyMWE4NgAuAAAAAABtZmj7uFKxTJUDw1rK%2B2UaAQClX%2BsphslyRLVqrG8fet%2FsAAAQ6hlfAAA%3D")
     time.sleep(40)
@@ -91,7 +93,7 @@ def get_input_autodesk():
     driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[4]/span').click()
     time.sleep(5)
     driver.find_element(By.XPATH, '/html/body/div/form/div/div/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[2]/div/div[3]/div[2]/div/div/div[1]/input').click()
-    time.sleep(120)
+    time.sleep(10)
 
     HTML = str(driver.find_element(By.CSS_SELECTOR, '#ReadingPaneContainerId > div > div > div > div.L72vd > div > div > div.aVla3 > div > div > div > div > div.XbIp4.jmmB7.GNqVo.yxtKT.allowTextSelection > div > div > div > div > div.x_content-wrapper > table > tbody > tr > td > div:nth-child(3) > table > tbody > tr > td > div:nth-child(7) > table > tbody > tr > td > div > table > tbody > tr > td > table > tbody > tr > td > a').get_attribute('outerHTML'))
 
@@ -102,7 +104,7 @@ def get_input_autodesk():
 
     driver.get(x)
 
-    time.sleep(120)
+    time.sleep(30)
 
 root = tk.Tk()
 root.configure(bg='#FFFFDD')
