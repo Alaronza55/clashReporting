@@ -27,11 +27,15 @@ filename = "XXX"
 
 ## GUI to get USER Input from ADESK BIM360
 def get_input_autodesk():
-    emailADSK = email_entry.get()
-    passwordADSK = password_entry.get()
+    emailADSK = email_entry_Autodesk.get()
+    passwordADSK = password_entry_Autodesk.get()
+    emailOutlook = email_entry_Outlook.get()
+    passwordOutlook = password_entry_Outlook.get()
     user_info = {
-      "email": emailADSK,
-      "password": passwordADSK
+      "email Autodesk": emailADSK,
+      "password Autodesk": passwordADSK,
+      "email Outlook": emailOutlook,
+      "password Outlook": passwordOutlook
     }
     root.destroy()
     if root.destroy : True 
@@ -71,53 +75,6 @@ def get_input_autodesk():
     time.sleep(10)
     driver.find_element(By.XPATH, '/html/body/div[1]/div/div[10]/div/div[2]/div[2]/div[3]/div[2]/div/div/div[3]/div/button[2]').click()
 
-    time.sleep(120)
-    return reportName
-
-root = tk.Tk()
-root.configure(bg='#FFFFDD')
-root.geometry(f"+{x}+{y}")
-img = tk.PhotoImage(file='.\Pictures\Logo Valens.png')
-label = tk.Label(root, image=img, bg='#FFFFDD')
-label.pack(side='bottom', fill='both', expand='yes')
-
-root.title("Autodesk Login: ")
-
-email_label = tk.Label(root, text="Autodesk Account Email:", bg='#FFFFDD')
-email_label.pack()
-
-email_entry = tk.Entry(root)
-email_entry.pack()
-
-password_label = tk.Label(root, text="Autodesk Account Password:", bg='#FFFFDD')
-password_label.pack()
-
-password_entry = tk.Entry(root, show="*")
-password_entry.pack()
-
-submit_button = tk.Button(root, text="Submit", command=get_input_autodesk)
-submit_button.pack()
-
-root.mainloop()
-
-# GUI to get USER Input from OUTLOOK
-def get_input_outlook():
-    emailOutlook = email_entry.get()
-    passwordOutlook = password_entry.get()
-    user_info = {
-      "email": emailOutlook,
-      "password": passwordOutlook
-    }
-    root.destroy()
-    if root.destroy : True 
-    
-    #Webdriver config:
-
-    service_obj = Service("WebDrivers_path\chromedriver.exe")
-    driver = webdriver.Chrome(service=service_obj)
-
-    #Download new report
-
     print("Connecting to Outlook and downloading report...")
 
     driver.maximize_window()
@@ -136,18 +93,6 @@ def get_input_outlook():
     driver.find_element(By.XPATH, '/html/body/div/form/div/div/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[2]/div/div[3]/div[2]/div/div/div[1]/input').click()
     time.sleep(120)
 
-    #In Outlook
-    #driver.find_element(By.XPATH, '/html/body/div[2]/div/div[1]/div/div[1]/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div/div[1]/div/div[2]/div/input[1]').click()
-    #time.sleep(5)
-    #driver.find_element(By.XPATH, '/html/body/div[2]/div/div[1]/div/div[1]/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div/div[1]/div/div[2]/div/input[1]').send_keys("Autodesk")
-    #time.sleep(5)
-
-    #In Outlook
-    driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div/div/div[3]/div[16]/div').click()
-    time.sleep(5)
-    driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div/div[3]/div[1]/div[2]/div/div/div/div/div/div[1]/div/div/div[1]/div[1]/div').click()
-    time.sleep(5)
-
     HTML = str(driver.find_element(By.CSS_SELECTOR, '#ReadingPaneContainerId > div > div > div > div.L72vd > div > div > div.aVla3 > div > div > div > div > div.XbIp4.jmmB7.GNqVo.yxtKT.allowTextSelection > div > div > div > div > div.x_content-wrapper > table > tbody > tr > td > div:nth-child(3) > table > tbody > tr > td > div:nth-child(7) > table > tbody > tr > td > div > table > tbody > tr > td > table > tbody > tr > td > a').get_attribute('outerHTML'))
 
     print(HTML)
@@ -158,35 +103,50 @@ def get_input_outlook():
     driver.get(x)
 
     time.sleep(30)
-    
+
+    time.sleep(120)
 
 root = tk.Tk()
-root.configure(bg='#6495ED')
+root.configure(bg='#FFFFDD')
 root.geometry(f"+{x}+{y}")
 img = tk.PhotoImage(file='.\Pictures\Logo Valens.png')
-label = tk.Label(root, image=img, bg='#6495ED')
+label = tk.Label(root, image=img, bg='#FFFFDD')
 label.pack(side='bottom', fill='both', expand='yes')
 
-root.title("Outlook Login: ")
+# Autodesk
 
-email_label = tk.Label(root, text="Outlook Account Email:", bg='#6495ED')
-email_label.pack()
+root.title("Login: ")
 
-email_entry = tk.Entry(root)
-email_entry.pack()
+email_label_Autodesk = tk.Label(root, text="Autodesk Account Email:", bg='#FFFFDD')
+email_label_Autodesk.pack()
 
-password_label = tk.Label(root, text="Outlook Account Password:", bg='#6495ED')
-password_label.pack()
+email_entry_Autodesk = tk.Entry(root)
+email_entry_Autodesk.pack()
 
-password_entry = tk.Entry(root, show="*")
-password_entry.pack()
+password_label_Autodesk = tk.Label(root, text="Autodesk Account Password:", bg='#FFFFDD')
+password_label_Autodesk.pack()
 
-submit_button = tk.Button(root, text="Submit", command=get_input_outlook)
+password_entry_Autodesk = tk.Entry(root, show="*")
+password_entry_Autodesk.pack()
+
+# Outlook
+
+email_label_Outlook = tk.Label(root, text="Outlook Account Email:", bg='#FFFFDD')
+email_label_Outlook.pack()
+
+email_entry_Outlook = tk.Entry(root)
+email_entry_Outlook.pack()
+
+password_label_Outlook = tk.Label(root, text="Outlook Account Password:", bg='#FFFFDD')
+password_label_Outlook.pack()
+
+password_entry_Outlook = tk.Entry(root, show="*")
+password_entry_Outlook.pack()
+
+submit_button = tk.Button(root, text="Submit", command=get_input_autodesk)
 submit_button.pack()
 
 root.mainloop()
-
-time.sleep(30)
 
 #################################################################################################################
 
@@ -268,7 +228,7 @@ if os.path.exists(folderName):
     for i in range(2,last_row+1):
         Issues = wb['Issues']
     Issues.cell(row=i,column=1).hyperlink.target
-    print(Issues.cell(row=i, column=1).hyperlink.target)
+    # print(Issues.cell(row=i, column=1).hyperlink.target)
 
     for i in range(2,last_row+1):
         Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
