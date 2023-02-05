@@ -112,23 +112,23 @@ def get_input_autodesk():
     time.sleep(30)
 
 root = tk.Tk()
-root.configure(bg='#FFFFDD')
+root.configure(bg='#1d1d1d')
 root.geometry(f"+{x}+{y}")
-img = tk.PhotoImage(file='.\Pictures\Logo Valens.png')
-label = tk.Label(root, image=img, bg='#FFFFDD')
+img = tk.PhotoImage(file='.\Pictures\Logo Valens NB.png')
+label = tk.Label(root, image=img, bg='#1d1d1d')
 label.pack(side='bottom', fill='both', expand='yes')
 
 # Autodesk
 
 root.title("Login: ")
 
-email_label_Autodesk = tk.Label(root, text="Autodesk Account Email:", bg='#FFFFDD')
+email_label_Autodesk = tk.Label(root, text="Autodesk Account Email:", bg='#1d1d1d')
 email_label_Autodesk.pack()
 
 email_entry_Autodesk = tk.Entry(root)
 email_entry_Autodesk.pack()
 
-password_label_Autodesk = tk.Label(root, text="Autodesk Account Password:", bg='#FFFFDD')
+password_label_Autodesk = tk.Label(root, text="Autodesk Account Password:", bg='#1d1d1d')
 password_label_Autodesk.pack()
 
 password_entry_Autodesk = tk.Entry(root, show="*")
@@ -136,13 +136,13 @@ password_entry_Autodesk.pack()
 
 # Outlook
 
-email_label_Outlook = tk.Label(root, text="Outlook Account Email:", bg='#FFFFDD')
+email_label_Outlook = tk.Label(root, text="Outlook Account Email:", bg='#1d1d1d')
 email_label_Outlook.pack()
 
 email_entry_Outlook = tk.Entry(root)
 email_entry_Outlook.pack()
 
-password_label_Outlook = tk.Label(root, text="Outlook Account Password:", bg='#FFFFDD')
+password_label_Outlook = tk.Label(root, text="Outlook Account Password:", bg='#1d1d1d')
 password_label_Outlook.pack()
 
 password_entry_Outlook = tk.Entry(root, show="*")
