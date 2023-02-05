@@ -93,7 +93,7 @@ def get_input_autodesk():
     driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[1]/div[2]/div/div/form/div[2]/div[4]/span').click()
     time.sleep(5)
     driver.find_element(By.XPATH, '/html/body/div/form/div/div/div[2]/div[1]/div/div/div/div/div/div[3]/div/div[2]/div/div[3]/div[2]/div/div/div[1]/input').click()
-    time.sleep(10)
+    time.sleep(20)
 
     driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div/div/div[3]/div[16]/div').click()
     time.sleep(5)
