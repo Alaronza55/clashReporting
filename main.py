@@ -125,13 +125,13 @@ root.title("Login: ")
 email_label_Autodesk = tk.Label(root, text="Autodesk Account Email:", bg='#1d1d1d',fg='white', font="Arial 12")
 email_label_Autodesk.pack()
 
-email_entry_Autodesk = tk.Entry(root, width= 25)
+email_entry_Autodesk = tk.Entry(root, width= 35)
 email_entry_Autodesk.pack()
 
 password_label_Autodesk = tk.Label(root, text="Autodesk Account Password:", bg='#1d1d1d',fg='white', font="Arial 12")
 password_label_Autodesk.pack()
 
-password_entry_Autodesk = tk.Entry(root, show="*", width= 25)
+password_entry_Autodesk = tk.Entry(root, show="*", width= 35)
 password_entry_Autodesk.pack()
 
 # Outlook
@@ -139,13 +139,13 @@ password_entry_Autodesk.pack()
 email_label_Outlook = tk.Label(root, text="Outlook Account Email:", bg='#1d1d1d',fg='white', font="Arial 12")
 email_label_Outlook.pack()
 
-email_entry_Outlook = tk.Entry(root, width= 25)
+email_entry_Outlook = tk.Entry(root, width= 35)
 email_entry_Outlook.pack()
 
 password_label_Outlook = tk.Label(root, text="Outlook Account Password:", bg='#1d1d1d',fg='white', font="Arial 12")
 password_label_Outlook.pack()
 
-password_entry_Outlook = tk.Entry(root, show="*", width= 25)
+password_entry_Outlook = tk.Entry(root, show="*", width= 35)
 password_entry_Outlook.pack()
 
 submit_button = tk.Button(root, text="Submit", command=get_input_autodesk, bg='#1d1d1d',fg='white', font="Arial 12",border='0' , padx=10, pady=20)
