@@ -12,6 +12,11 @@ import tkinter as tk
 import tkinter.messagebox as msgbox
 import pyautogui
 
+#Variables
+FILENAME = "XXX"
+NEW_NAME = "XXX.xlsx"
+current_GMT = time.gmtime()
+
 #Get screen size
 def extract_screen_width_height():
     screen_width, screen_height = pyautogui.size()
@@ -21,12 +26,15 @@ screen_width, screen_height = extract_screen_width_height()
 x = (screen_width // 2)-200 
 y = (screen_height // 2)-200
 
-#Variables
-filename = "XXX"
-# REPORTNAME = "TOTAL230131.xlsx"
+def close_window() :
+    if email_entry_Autodesk != "":
+        get_input
+    elif password_entry_Autodesk != "":
+        get_input
+
 
 ## GUI to get USER Input from ADESK BIM360
-def get_input_autodesk():
+def get_input():
     emailADSK = email_entry_Autodesk.get()
     passwordADSK = password_entry_Autodesk.get()
     emailOutlook = email_entry_Outlook.get()
@@ -71,7 +79,7 @@ def get_input_autodesk():
 
     #Download new report
     time.sleep(10)
-    driver.find_element(By.XPATH, '/html/body/div[1]/div/div[10]/div/div[2]/div[2]/div[3]/div[2]/div/div/div[2]/div/div[1]/div/div/input').send_keys(filename)
+    driver.find_element(By.XPATH, '/html/body/div[1]/div/div[10]/div/div[2]/div[2]/div[3]/div[2]/div/div/div[2]/div/div[1]/div/div/input').send_keys(FILENAME)
     time.sleep(10)
     driver.find_element(By.XPATH, '/html/body/div[1]/div/div[10]/div/div[2]/div[2]/div[3]/div[2]/div/div/div[3]/div/button[2]').click()
 
@@ -148,16 +156,15 @@ password_label_Outlook.pack()
 password_entry_Outlook = tk.Entry(root, show="*", width= 35)
 password_entry_Outlook.pack()
 
-submit_button = tk.Button(root, text="Submit", command=get_input_autodesk, bg='#1d1d1d',fg='white', font="Arial 12",border='0' , padx=10, pady=20)
+submit_button = tk.Button(root, text="Submit", command=get_input, bg='#1d1d1d',fg='white', font="Arial 12",border='0' , padx=10, pady=20)
 submit_button.pack()
 
 root.mainloop()
 
 time.sleep(30)
 
-#################################################################################################################
 
-new_name = "XXX.xlsx"
+#################################################################################################################
 
 Pythonfile=os.getcwd()
 print(Pythonfile)
@@ -180,7 +187,7 @@ for file in os.listdir(Downloads):
     if file.startswith("XXX"): 
         old_name = str(file)
         old_name_path = os.path.join(Downloads,old_name)
-        new_name_path = os.path.join(Downloads,new_name)
+        new_name_path = os.path.join(Downloads,NEW_NAME)
         os.rename(old_name_path,new_name_path)
 
 # print(old_name_path)
