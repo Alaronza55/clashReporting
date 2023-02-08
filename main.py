@@ -16,6 +16,8 @@ import pyautogui
 FILENAME = "XXX"
 NEW_NAME = "XXX.xlsx"
 current_GMT = time.gmtime()
+USERS = os.path.expanduser('~')
+FOLDERNAME='Extract'
 
 #Get screen size
 def extract_screen_width_height():
@@ -26,12 +28,21 @@ screen_width, screen_height = extract_screen_width_height()
 x = (screen_width // 2)-200 
 y = (screen_height // 2)-200
 
-def close_window() :
-    if email_entry_Autodesk != "":
-        get_input
-    elif password_entry_Autodesk != "":
-        get_input
-
+def starting_app() :
+    if email_entry_Autodesk.get() == "" :
+        root.destroy()
+        exit()
+    elif password_entry_Autodesk.get() =="":
+        root.destroy()
+        exit()
+    elif email_entry_Outlook.get() =="":
+        root.destroy()
+        exit()
+    elif password_entry_Outlook.get() =="":
+        root.destroy()
+        exit()
+    else:
+        get_input()
 
 ## GUI to get USER Input from ADESK BIM360
 def get_input():
@@ -156,7 +167,7 @@ password_label_Outlook.pack()
 password_entry_Outlook = tk.Entry(root, show="*", width= 35)
 password_entry_Outlook.pack()
 
-submit_button = tk.Button(root, text="Submit", command=get_input, bg='#1d1d1d',fg='white', font="Arial 12",border='0' , padx=10, pady=20)
+submit_button = tk.Button(root, text="Submit", command=starting_app, bg='#1d1d1d',fg='white', font="Arial 12",border='0' , padx=10, pady=20)
 submit_button.pack()
 
 root.mainloop()
@@ -169,124 +180,103 @@ time.sleep(30)
 Pythonfile=os.getcwd()
 print(Pythonfile)
 
-users = os.path.expanduser('~')
-# print(users)
-
-os.chdir(users)
-listLogin=os.listdir(".")
+os.chdir(USERS)
+# listLogin=os.listdir(".")
 # print(users)
 
 os.chdir("Downloads")
-listDownloads=os.listdir(".")
+# listDownloads=os.listdir(".")
 # print(listDownloads)
 
 Downloads=os.getcwd()
 # print(Downloads)
 
-for file in os.listdir(Downloads):
-    if file.startswith("XXX"): 
-        old_name = str(file)
-        old_name_path = os.path.join(Downloads,old_name)
-        new_name_path = os.path.join(Downloads,NEW_NAME)
-        os.rename(old_name_path,new_name_path)
+def rename_Downloads(): 
 
-# print(old_name_path)
-# print(new_name_path)
-
-
-#################################################################################################################
-
-current_GMT = time.gmtime()
-
-time_stamp = calendar.timegm(current_GMT)
-print("Current timestamp:", time_stamp)
-
-date_time = datetime.fromtimestamp(time_stamp)
-print("The date and time is:", date_time)
-
-formatted_date_time = date_time.strftime("%Y_%m_%d_%H_%M_%S")
-
-reportName = f"Report_{formatted_date_time}.xlsx"
+    for file in os.listdir(Downloads):
+        if file.startswith("XXX"): 
+            old_name = str(file)
+            old_name_path = os.path.join(Downloads,old_name)
+            new_name_path = os.path.join(Downloads,NEW_NAME)
+            os.rename(old_name_path,new_name_path)
+        else :
+            exit()
 
 #################################################################################################################
 
-print("Saving new reporting source file in Extract directory...")
+def timestamp() :
+    current_GMT = time.gmtime()
 
-# To open the workbook 
-# workbook object is created 
-wb = openpyxl.load_workbook("XXX.xlsx") 
-filename = "XXX.xlsx"
-Overview = wb['Overview']
-Issues = wb['Issues']
-last_row = Issues.max_row
-folderName ='Extract'
+    time_stamp = calendar.timegm(current_GMT)
+    print("Current timestamp:", time_stamp)
 
-os.chdir(users)
+    date_time = datetime.fromtimestamp(time_stamp)
+    print("The date and time is:", date_time)
+
+    formatted_date_time = date_time.strftime("%Y_%m_%d_%H_%M_%S")
+
+    reportName = f"Report_{formatted_date_time}.xlsx"
+
+    return reportName
+
+#################################################################################################################
+
+os.chdir(USERS)
 # cwd=print(os.getcwd())
 
 os.chdir("Documents")
 listDocuments=os.listdir(".")
 # print(listDocuments)
 
-if os.path.exists(folderName):
-    print("Exist")
-
-    os.chdir("Extract")
-    listExtract=os.listdir(".")
-    # print(listExtract)
-
-    wb.remove(Overview)
-    sheet_obj = wb.active 
-    Issues.insert_cols(2)
-
-    for i in range(2,last_row+1):
+def wb_Treatement() :
+        wb = openpyxl.load_workbook("XXX.xlsx") 
+        filename = "XXX.xlsx"
+        Overview = wb['Overview']
         Issues = wb['Issues']
-    Issues.cell(row=i,column=1).hyperlink.target
-    # print(Issues.cell(row=i, column=1).hyperlink.target)
+        last_row = Issues.max_row
 
-    for i in range(2,last_row+1):
-        Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
+        wb.remove(Overview)
+        sheet_obj = wb.active 
+        Issues.insert_cols(2)
 
-    wb.save(reportName)
+        for i in range(2,last_row+1):
+            Issues = wb['Issues']
+        Issues.cell(row=i,column=1).hyperlink.target
+        # print(Issues.cell(row=i, column=1).hyperlink.target)
 
+        for i in range(2,last_row+1):
+            Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
 
-else:
-    os.makedirs(folderName)
-    print("Folder created with name: " + folderName)
+        print("Saving new reporting source file in Extract directory...")
 
-    os.chdir("Extract")
-    listExtract=os.listdir(".")
-    # print(listExtract)
+        wb.save(timestamp())
 
-    wb.remove(Overview)
-    sheet_obj = wb.active 
-    Issues.insert_cols(2)
+def file_exist():
+    if os.path.exists(FOLDERNAME):
+        wb_Treatement()
+    
+    else :
+        os.makedirs(FOLDERNAME)
+        wb_Treatement()
 
-    for i in range(2,last_row+1):
-        Issues = wb['Issues']
-    Issues.cell(row=i,column=1).hyperlink.target
-    print(Issues.cell(row=i, column=1).hyperlink.target)
-
-    for i in range(2,last_row+1):
-        Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
-
-    wb.save(reportName)
 #################################################################################################################
 
-print("Deleting temp files from Downloads directory")
+def deleting_Temp_XXX():
 
-os.chdir(Downloads)
+    print("Deleting temp files from Downloads directory")
 
-for dirpath, dirnames, filenames in os.walk("."):
-    for filename in [f for f in filenames if f.endswith(".xlsx")]:
-       print(os.path.join(dirpath, filename))
+    os.chdir(Downloads)
 
-for file in os.listdir():
-    if file.startswith("XXX"): 
-        os.remove('.\XXX.xlsx')
+    for dirpath, dirnames, filenames in os.walk("."):
+        for filename in [f for f in filenames if f.endswith(".xlsx")]:
+            print(os.path.join(dirpath, filename))
 
-print("Operation completed. You can now close the program. Thank you come again!")
+    for file in os.listdir():
+        if file.startswith("XXX"): 
+            os.remove('.\XXX.xlsx')
 
-# msgbox.showinfo("User Info", f"File has been saved in {users}\Documents\{folderName}")
+    print("Operation completed. You can now close the program. Thank you come again!")
 
-time.sleep(3600)
+    # msgbox.showinfo("User Info", f"File has been saved in {users}\Documents\{folderName}")
+
+    time.sleep(3600)
