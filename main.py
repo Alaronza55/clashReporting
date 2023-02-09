@@ -98,7 +98,7 @@ def get_input_autodesk():
     driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div/div/div[3]/div[16]/div').click()
     time.sleep(5)
     driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div/div[3]/div[1]/div[2]/div/div/div/div/div/div[1]/div/div/div[1]/div[1]/div').click()
-    time.sleep(5)
+    time.sleep(20)
 
     HTML = str(driver.find_element(By.CSS_SELECTOR, '#ReadingPaneContainerId > div > div > div > div.L72vd > div > div > div.aVla3 > div > div > div > div > div.XbIp4.jmmB7.GNqVo.yxtKT.allowTextSelection > div > div > div > div > div.x_content-wrapper > table > tbody > tr > td > div:nth-child(3) > table > tbody > tr > td > div:nth-child(7) > table > tbody > tr > td > div > table > tbody > tr > td > table > tbody > tr > td > a').get_attribute('outerHTML'))
 
