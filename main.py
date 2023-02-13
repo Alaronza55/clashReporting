@@ -252,13 +252,13 @@ def wb_Treatement() :
 
         wb.save(timestamp())
 
-def file_exist():
-    if os.path.exists(FOLDERNAME):
-        wb_Treatement()
-    
-    else :
-        os.makedirs(FOLDERNAME)
-        wb_Treatement()
+
+if os.path.exists(FOLDERNAME):
+    wb_Treatement()
+
+else :
+    os.makedirs(FOLDERNAME)
+    wb_Treatement()
 
 #################################################################################################################
 
