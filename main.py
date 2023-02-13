@@ -45,6 +45,16 @@ def starting_app() :
     else:
         get_input()
 
+
+def delete_oldies():
+    os.chdir(Downloads) 
+    for file_name in os.listdir(Downloads):        
+        if file_name.startswith("XXX"):  
+            os.remove(os.path.join(Downloads, file_name))
+
+#Delete all TEMP files
+delete_oldies()
+
 ## GUI to get USER Input from ADESK BIM360
 def get_input():
     emailADSK = email_entry_Autodesk.get()
@@ -131,6 +141,21 @@ def get_input():
 
     time.sleep(30)
 
+    def timestamp() :
+        current_GMT = time.gmtime()
+
+        time_stamp = calendar.timegm(current_GMT)
+        print("Current timestamp:", time_stamp)
+
+        date_time = datetime.fromtimestamp(time_stamp)
+        print("The date and time is:", date_time)
+
+        formatted_date_time = date_time.strftime("%Y_%m_%d_%H_%M_%S")
+
+        reportName = f"Report_{formatted_date_time}.xlsx"
+
+        return reportName
+
     def rename_Downloads():
         os.chdir(Downloads) 
         for file in os.listdir(Downloads):        
@@ -146,8 +171,6 @@ def get_input():
 
         else :
             rename_Downloads()
-
-
 
     rename_Downloads()
     
@@ -304,3 +327,4 @@ time.sleep(30)
 #     # msgbox.showinfo("User Info", f"File has been saved in {users}\Documents\{folderName}")
 
 #     time.sleep(3600)
+
