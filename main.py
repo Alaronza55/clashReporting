@@ -19,6 +19,8 @@ current_GMT = time.gmtime()
 USERS = os.path.expanduser('~')
 FOLDERNAME='Extract'
 Downloads=(f'{USERS}\Downloads')
+Documents=(f'{USERS}\Documents')
+Extract = (f'{Documents}\{FOLDERNAME}')
 
 #Get screen size
 def extract_screen_width_height():
@@ -46,15 +48,6 @@ def starting_app() :
         get_input()
 
 
-def delete_oldies():
-    os.chdir(Downloads) 
-    for file_name in os.listdir(Downloads):        
-        if file_name.startswith("XXX"):  
-            os.remove(os.path.join(Downloads, file_name))
-
-#Delete all TEMP files
-delete_oldies()
-
 ## GUI to get USER Input from ADESK BIM360
 def get_input():
     emailADSK = email_entry_Autodesk.get()
@@ -70,8 +63,17 @@ def get_input():
     root.destroy()
     if root.destroy : True 
     
-    #Webdriver config:
+    def delete_oldies():
+        os.chdir(Downloads) 
+        for file_name in os.listdir(Downloads):        
+            if file_name.startswith("XXX"):  
+                os.remove(os.path.join(Downloads, file_name))
+                
+    #Delete all TEMP files
+    print('Deleting all old files from Downloads directory')
+    delete_oldies()
 
+    #Webdriver config:
     service_obj = Service("WebDrivers_path\chromedriver.exe")
     driver = webdriver.Chrome(service=service_obj)
 
@@ -156,6 +158,8 @@ def get_input():
 
         return reportName
 
+    timestamp()
+
     def rename_Downloads():
         os.chdir(Downloads) 
         for file in os.listdir(Downloads):        
@@ -165,14 +169,39 @@ def get_input():
                 new_name_path = os.path.join(Downloads,NEW_NAME)
                 os.rename(old_name_path,new_name_path)
 
-        if os.path.exists(f'{Downloads}\{NEW_NAME}'):
-            os.remove(NEW_NAME)
-            rename_Downloads()
-
-        else :
-            rename_Downloads()
-
     rename_Downloads()
+
+    def wb_Treatement() :
+        os.chdir(Downloads) 
+        wb = openpyxl.load_workbook("XXX.xlsx") 
+        Overview = wb['Overview']
+        Issues = wb['Issues']
+        last_row = Issues.max_row
+
+        wb.remove(Overview)
+        sheet_obj = wb.active 
+        Issues.insert_cols(2)
+
+        for i in range(2,last_row+1):
+            Issues = wb['Issues']
+        Issues.cell(row=i,column=1).hyperlink.target
+        # print(Issues.cell(row=i, column=1).hyperlink.target)
+
+        for i in range(2,last_row+1):
+            Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
+
+        print("Saving new reporting source file in Extract directory...")
+
+        os.chdir(Extract)
+
+        wb.save(timestamp())
+    
+    if os.path.exists(Extract):
+        wb_Treatement()
+    else :
+        os.makedirs(Extract)
+        wb_Treatement()
+
     
 
 root = tk.Tk()
