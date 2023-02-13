@@ -202,6 +202,25 @@ def get_input():
         os.makedirs(Extract)
         wb_Treatement()
 
+    def deleting_Temp_XXX():
+
+        print("Deleting temp files from Downloads directory")
+
+        os.chdir(Downloads)
+
+        for dirpath, dirnames, filenames in os.walk("."):
+            for filename in [f for f in filenames if f.endswith(".xlsx")]:
+                print(os.path.join(dirpath, filename))
+
+        for file in os.listdir():
+            if file.startswith("XXX"): 
+                os.remove('.\XXX.xlsx')
+
+        print("Operation completed. You can now close the program. Thank you come again!")
+
+        msgbox.showinfo("User Info", "File has been saved in : " f'{Extract}')
+
+    deleting_Temp_XXX()
     
 
 root = tk.Tk()
@@ -247,113 +266,3 @@ submit_button.pack()
 root.mainloop()
 
 time.sleep(30)
-
-
-
-#################################################################################################################
-
-# def rename_Downloads():
-#     os.chdir(Downloads) 
-#     for file in os.listdir(Downloads):        
-#         if file.startswith("XXX"): 
-#             old_name = str(file)
-#             old_name_path = os.path.join(Downloads,old_name)
-#             new_name_path = os.path.join(Downloads,NEW_NAME)
-#             os.rename(old_name_path,new_name_path)
-
-#     if os.path.exists(f'{Downloads}\{NEW_NAME}'):
-#         os.remove(NEW_NAME)
-#         rename_Downloads()
-
-#     else :
-#         rename_Downloads()
-
-# #################################################################################################################
-
-# def timestamp() :
-#     current_GMT = time.gmtime()
-
-#     time_stamp = calendar.timegm(current_GMT)
-#     print("Current timestamp:", time_stamp)
-
-#     date_time = datetime.fromtimestamp(time_stamp)
-#     print("The date and time is:", date_time)
-
-#     formatted_date_time = date_time.strftime("%Y_%m_%d_%H_%M_%S")
-
-#     reportName = f"Report_{formatted_date_time}.xlsx"
-
-#     return reportName
-
-# #################################################################################################################
-
-# os.chdir(USERS)
-# # cwd=print(os.getcwd())
-
-# os.chdir(Downloads)
-# # listDocuments=os.listdir(".")
-# # print(listDocuments)
-
-# def wb_Treatement() :
-#         wb = openpyxl.load_workbook("XXX.xlsx") 
-#         filename = "XXX.xlsx"
-#         Overview = wb['Overview']
-#         Issues = wb['Issues']
-#         last_row = Issues.max_row
-
-#         wb.remove(Overview)
-#         sheet_obj = wb.active 
-#         Issues.insert_cols(2)
-
-#         for i in range(2,last_row+1):
-#             Issues = wb['Issues']
-#         Issues.cell(row=i,column=1).hyperlink.target
-#         # print(Issues.cell(row=i, column=1).hyperlink.target)
-
-#         for i in range(2,last_row+1):
-#             Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
-
-#         print("Saving new reporting source file in Extract directory...")
-
-#         # wb.save(timestamp())
-#         wb.save()
-        
-
-# os.chdir(USERS)
-
-# Documents = os.chdir("Documents")
-
-
-# if os.path.exists(f'{Documents}\{FOLDERNAME}'):
-#     wb_Treatement()
-#     oldName = "XXX.xlsx"
-#     os.rename(oldName,timestamp())
-
-# else :
-#     os.makedirs(f'{Documents}\{FOLDERNAME}')
-#     wb_Treatement()
-#     oldName = "XXX.xlsx"
-#     os.rename(oldName,timestamp())
-
-# #################################################################################################################
-
-# def deleting_Temp_XXX():
-
-#     print("Deleting temp files from Downloads directory")
-
-#     os.chdir(Downloads)
-
-#     for dirpath, dirnames, filenames in os.walk("."):
-#         for filename in [f for f in filenames if f.endswith(".xlsx")]:
-#             print(os.path.join(dirpath, filename))
-
-#     for file in os.listdir():
-#         if file.startswith("XXX"): 
-#             os.remove('.\XXX.xlsx')
-
-#     print("Operation completed. You can now close the program. Thank you come again!")
-
-#     # msgbox.showinfo("User Info", f"File has been saved in {users}\Documents\{folderName}")
-
-#     time.sleep(3600)
-
