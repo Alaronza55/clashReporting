@@ -225,7 +225,7 @@ def timestamp() :
 os.chdir(USERS)
 # cwd=print(os.getcwd())
 
-os.chdir("Documents")
+os.chdir(Downloads)
 listDocuments=os.listdir(".")
 # print(listDocuments)
 
@@ -252,12 +252,16 @@ def wb_Treatement() :
 
         wb.save(timestamp())
 
+os.chdir(USERS)
 
-if os.path.exists(FOLDERNAME):
+Documents = os.chdir("Documents")
+
+
+if os.path.exists(f'{Documents}\{FOLDERNAME}'):
     wb_Treatement()
 
 else :
-    os.makedirs(FOLDERNAME)
+    os.makedirs(f'{Documents}\{FOLDERNAME}')
     wb_Treatement()
 
 #################################################################################################################
