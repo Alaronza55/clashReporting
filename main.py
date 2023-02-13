@@ -226,7 +226,7 @@ os.chdir(USERS)
 # cwd=print(os.getcwd())
 
 os.chdir(Downloads)
-listDocuments=os.listdir(".")
+# listDocuments=os.listdir(".")
 # print(listDocuments)
 
 def wb_Treatement() :
@@ -250,7 +250,9 @@ def wb_Treatement() :
 
         print("Saving new reporting source file in Extract directory...")
 
-        wb.save(timestamp())
+        # wb.save(timestamp())
+        wb.save()
+        
 
 os.chdir(USERS)
 
@@ -259,10 +261,14 @@ Documents = os.chdir("Documents")
 
 if os.path.exists(f'{Documents}\{FOLDERNAME}'):
     wb_Treatement()
+    oldName = "XXX.xlsx"
+    os.rename(oldName,timestamp())
 
 else :
     os.makedirs(f'{Documents}\{FOLDERNAME}')
     wb_Treatement()
+    oldName = "XXX.xlsx"
+    os.rename(oldName,timestamp())
 
 #################################################################################################################
 
