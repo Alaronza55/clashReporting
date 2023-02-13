@@ -18,6 +18,7 @@ NEW_NAME = "XXX.xlsx"
 current_GMT = time.gmtime()
 USERS = os.path.expanduser('~')
 FOLDERNAME='Extract'
+Downloads=(f'{USERS}\Downloads')
 
 #Get screen size
 def extract_screen_width_height():
@@ -130,6 +131,27 @@ def get_input():
 
     time.sleep(30)
 
+    def rename_Downloads():
+        os.chdir(Downloads) 
+        for file in os.listdir(Downloads):        
+            if file.startswith("XXX"): 
+                old_name = str(file)
+                old_name_path = os.path.join(Downloads,old_name)
+                new_name_path = os.path.join(Downloads,NEW_NAME)
+                os.rename(old_name_path,new_name_path)
+
+        if os.path.exists(f'{Downloads}\{NEW_NAME}'):
+            os.remove(NEW_NAME)
+            rename_Downloads()
+
+        else :
+            rename_Downloads()
+
+
+
+    rename_Downloads()
+    
+
 root = tk.Tk()
 root.configure(bg='#1d1d1d')
 root.geometry(f"+{x}+{y}")
@@ -175,119 +197,110 @@ root.mainloop()
 time.sleep(30)
 
 
-#################################################################################################################
-
-os.chdir(USERS)
-# listLogin=os.listdir(".")
-# print(USERS)
-
-os.chdir("Downloads")
-# listDownloads=os.listdir(".")
-# print(listDownloads)
-
-Downloads=os.getcwd()
-# print(Downloads)
-
-def rename_Downloads(): 
-    for file in os.listdir(Downloads):        
-        if file.startswith("XXX"): 
-            old_name = str(file)
-            old_name_path = os.path.join(Downloads,old_name)
-            new_name_path = os.path.join(Downloads,NEW_NAME)
-            os.rename(old_name_path,new_name_path)
-
-if os.path.exists(f'{Downloads}\{NEW_NAME}'):
-    os.remove(NEW_NAME)
-    rename_Downloads()
-
-else :
-    rename_Downloads()
 
 #################################################################################################################
 
-def timestamp() :
-    current_GMT = time.gmtime()
+# def rename_Downloads():
+#     os.chdir(Downloads) 
+#     for file in os.listdir(Downloads):        
+#         if file.startswith("XXX"): 
+#             old_name = str(file)
+#             old_name_path = os.path.join(Downloads,old_name)
+#             new_name_path = os.path.join(Downloads,NEW_NAME)
+#             os.rename(old_name_path,new_name_path)
 
-    time_stamp = calendar.timegm(current_GMT)
-    print("Current timestamp:", time_stamp)
+#     if os.path.exists(f'{Downloads}\{NEW_NAME}'):
+#         os.remove(NEW_NAME)
+#         rename_Downloads()
 
-    date_time = datetime.fromtimestamp(time_stamp)
-    print("The date and time is:", date_time)
+#     else :
+#         rename_Downloads()
 
-    formatted_date_time = date_time.strftime("%Y_%m_%d_%H_%M_%S")
+# #################################################################################################################
 
-    reportName = f"Report_{formatted_date_time}.xlsx"
+# def timestamp() :
+#     current_GMT = time.gmtime()
 
-    return reportName
+#     time_stamp = calendar.timegm(current_GMT)
+#     print("Current timestamp:", time_stamp)
 
-#################################################################################################################
+#     date_time = datetime.fromtimestamp(time_stamp)
+#     print("The date and time is:", date_time)
 
-os.chdir(USERS)
-# cwd=print(os.getcwd())
+#     formatted_date_time = date_time.strftime("%Y_%m_%d_%H_%M_%S")
 
-os.chdir(Downloads)
-# listDocuments=os.listdir(".")
-# print(listDocuments)
+#     reportName = f"Report_{formatted_date_time}.xlsx"
 
-def wb_Treatement() :
-        wb = openpyxl.load_workbook("XXX.xlsx") 
-        filename = "XXX.xlsx"
-        Overview = wb['Overview']
-        Issues = wb['Issues']
-        last_row = Issues.max_row
+#     return reportName
 
-        wb.remove(Overview)
-        sheet_obj = wb.active 
-        Issues.insert_cols(2)
+# #################################################################################################################
 
-        for i in range(2,last_row+1):
-            Issues = wb['Issues']
-        Issues.cell(row=i,column=1).hyperlink.target
-        # print(Issues.cell(row=i, column=1).hyperlink.target)
+# os.chdir(USERS)
+# # cwd=print(os.getcwd())
 
-        for i in range(2,last_row+1):
-            Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
+# os.chdir(Downloads)
+# # listDocuments=os.listdir(".")
+# # print(listDocuments)
 
-        print("Saving new reporting source file in Extract directory...")
+# def wb_Treatement() :
+#         wb = openpyxl.load_workbook("XXX.xlsx") 
+#         filename = "XXX.xlsx"
+#         Overview = wb['Overview']
+#         Issues = wb['Issues']
+#         last_row = Issues.max_row
 
-        # wb.save(timestamp())
-        wb.save()
+#         wb.remove(Overview)
+#         sheet_obj = wb.active 
+#         Issues.insert_cols(2)
+
+#         for i in range(2,last_row+1):
+#             Issues = wb['Issues']
+#         Issues.cell(row=i,column=1).hyperlink.target
+#         # print(Issues.cell(row=i, column=1).hyperlink.target)
+
+#         for i in range(2,last_row+1):
+#             Issues.cell(row=i,column=2).value = Issues.cell(row=i,column=1).hyperlink.target
+
+#         print("Saving new reporting source file in Extract directory...")
+
+#         # wb.save(timestamp())
+#         wb.save()
         
 
-os.chdir(USERS)
+# os.chdir(USERS)
 
-Documents = os.chdir("Documents")
+# Documents = os.chdir("Documents")
 
 
-if os.path.exists(f'{Documents}\{FOLDERNAME}'):
-    wb_Treatement()
-    oldName = "XXX.xlsx"
-    os.rename(oldName,timestamp())
+# if os.path.exists(f'{Documents}\{FOLDERNAME}'):
+#     wb_Treatement()
+#     oldName = "XXX.xlsx"
+#     os.rename(oldName,timestamp())
 
-else :
-    os.makedirs(f'{Documents}\{FOLDERNAME}')
-    wb_Treatement()
-    oldName = "XXX.xlsx"
-    os.rename(oldName,timestamp())
+# else :
+#     os.makedirs(f'{Documents}\{FOLDERNAME}')
+#     wb_Treatement()
+#     oldName = "XXX.xlsx"
+#     os.rename(oldName,timestamp())
 
-#################################################################################################################
+# #################################################################################################################
 
-def deleting_Temp_XXX():
+# def deleting_Temp_XXX():
 
-    print("Deleting temp files from Downloads directory")
+#     print("Deleting temp files from Downloads directory")
 
-    os.chdir(Downloads)
+#     os.chdir(Downloads)
 
-    for dirpath, dirnames, filenames in os.walk("."):
-        for filename in [f for f in filenames if f.endswith(".xlsx")]:
-            print(os.path.join(dirpath, filename))
+#     for dirpath, dirnames, filenames in os.walk("."):
+#         for filename in [f for f in filenames if f.endswith(".xlsx")]:
+#             print(os.path.join(dirpath, filename))
 
-    for file in os.listdir():
-        if file.startswith("XXX"): 
-            os.remove('.\XXX.xlsx')
+#     for file in os.listdir():
+#         if file.startswith("XXX"): 
+#             os.remove('.\XXX.xlsx')
 
-    print("Operation completed. You can now close the program. Thank you come again!")
+#     print("Operation completed. You can now close the program. Thank you come again!")
 
-    # msgbox.showinfo("User Info", f"File has been saved in {users}\Documents\{folderName}")
+#     # msgbox.showinfo("User Info", f"File has been saved in {users}\Documents\{folderName}")
 
-    time.sleep(3600)
+#     time.sleep(3600)
