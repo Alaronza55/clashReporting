@@ -12,6 +12,8 @@ import tkinter as tk
 import tkinter.messagebox as msgbox
 import pyautogui
 import win32com.client as win32
+from pywintypes import com_error
+import win32com.client
 
 #Variables
 FILENAME = "XXX"
@@ -239,6 +241,31 @@ def get_input():
         excel.Quit()
     
     open_refresh()
+
+    def export_pdf():
+        # Path to original excel file
+        WB_PATH = r'C:\Users\ADavidson\Documents\Extract\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx'
+        # PDF path when saving
+        PATH_TO_PDF = r'C:\Users\ADavidson\Documents\Extract\Test.pdf'
+        excel = win32com.client.Dispatch("Excel.Application")
+        excel.Visible = False
+        try:
+            print('Start conversion to PDF')
+            # Open
+            wb = excel.Workbooks.Open(WB_PATH)
+            # Specify the sheet you want to save by index. 1 is the first (leftmost) sheet.
+            ws_index_list = [1]
+            # Save
+            wb.ActiveSheet.ExportAsFixedFormat(0, PATH_TO_PDF)
+        except com_error as e:
+            print('failed.')
+        else:
+            print('Succeeded.')
+        finally:
+            wb.Close()
+            excel.Quit()
+
+    export_pdf()
 
 root = tk.Tk()
 root.configure(bg='#1d1d1d')
