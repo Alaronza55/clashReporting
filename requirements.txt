@@ -4,3 +4,4 @@ tk==0.1.0
 PyAutoGUI==0.9.53
 XlsxWriter==3.0.3
 webdriver-manager==3.8.4
+PyAutoGUI==0.9.53
