@@ -14,6 +14,7 @@ import pyautogui
 import win32com.client as win32
 from pywintypes import com_error
 import win32com.client
+import fitz
 
 #Variables
 FILENAME = "XXX"
@@ -266,6 +267,22 @@ def get_input():
             excel.Quit()
 
     export_pdf()
+
+    def crop_pdf(input_file, output_file, left, bottom, right, top):
+        os.chdir(Extract)
+        # Open input PDF file
+        with fitz.open(input_file) as pdf:
+            # Get the first page of PDF file
+            page = pdf[0]
+            # Set the crop box for the page
+            rect = fitz.Rect(left, bottom, right, top)
+            page.set_cropbox(rect)
+
+            # Save the cropped PDF to the output file
+            pdf.save(output_file)
+
+    crop_pdf('test.pdf', 'test2.pdf', 0, 50, 9300, 5000)
+
 
 root = tk.Tk()
 root.configure(bg='#1d1d1d')
