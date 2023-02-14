@@ -11,6 +11,7 @@ from xlsxwriter.workbook import Workbook
 import tkinter as tk
 import tkinter.messagebox as msgbox
 import pyautogui
+import win32com.client as win32
 
 #Variables
 FILENAME = "XXX"
@@ -21,6 +22,7 @@ FOLDERNAME='Extract'
 Downloads=(f'{USERS}\Downloads')
 Documents=(f'{USERS}\Documents')
 Extract = (f'{Documents}\{FOLDERNAME}')
+REPORT = "REPORT.xlsx"
 
 #Get screen size
 def extract_screen_width_height():
@@ -194,7 +196,7 @@ def get_input():
 
         os.chdir(Extract)
 
-        wb.save(timestamp())
+        wb.save(REPORT)
     
     if os.path.exists(Extract):
         wb_Treatement()
@@ -221,7 +223,22 @@ def get_input():
         msgbox.showinfo("User Info", "File has been saved in : " f'{Extract}')
 
     deleting_Temp_XXX()
+
+    def open_refresh():
+        # Open Excel Application
+        excel = win32.gencache.EnsureDispatch('Excel.Application')
+
+        # Open the workbook
+        workbook = excel.Workbooks.Open('C:\\Users\\ADavidson\\Documents\\Extract\\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx')
+
+        # Refresh all data connections
+        workbook.RefreshAll()
+
+        # Close the workbook and quit Excel Application
+        workbook.Close(SaveChanges=True)
+        excel.Quit()
     
+    open_refresh()
 
 root = tk.Tk()
 root.configure(bg='#1d1d1d')
