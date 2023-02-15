@@ -242,11 +242,33 @@ def get_input():
         # Refresh all data connections
         workbook.RefreshAll()
 
+        time.sleep(20)
+
         # Close the workbook and quit Excel Application
         workbook.Close(SaveChanges=True)
         excel.Quit()
     
     open_refresh()
+
+    pdf_Name = f'IPW1-CALSH DETECTION-#{indice}-{timestamp()}.pdf' 
+
+    def rename_header_excel():
+        # Open Excel Application
+        excel = win32.gencache.EnsureDispatch('Excel.Application')
+
+        # Open the workbook
+        workbook = excel.Workbooks.Open('C:\\Users\\ADavidson\\Documents\\Extract\\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx')
+
+        excel.Visible = False
+
+        ws = workbook.Worksheets('PVT CHART')
+
+        ws.Cells(1,2).Value = (pdf_Name)
+
+        workbook.Close(SaveChanges=True)
+        excel.Quit()
+    
+    rename_header_excel()
 
     def export_pdf():
         # Path to original excel file
@@ -286,8 +308,6 @@ def get_input():
             # Save the cropped PDF to the output file
             pdf.save(output_file)
 
-    pdf_Name = f'IPW1-CALSH DETECTION-#{indice_entry}-{timestamp()}.pdf'
-
     crop_pdf('Test.pdf', pdf_Name, 0, 50, 9300, 5000)
 
     def remove_test_pdf():
@@ -295,6 +315,8 @@ def get_input():
         os.remove('test.pdf')
 
     remove_test_pdf()
+
+
 
 root = tk.Tk()
 root.configure(bg='#1d1d1d')
