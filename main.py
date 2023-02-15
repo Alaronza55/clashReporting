@@ -49,6 +49,9 @@ def starting_app() :
     elif password_entry_Outlook.get() =="":
         root.destroy()
         exit()
+    elif indice_entry.get() =="":
+        root.destroy()
+        exit()
     else:
         get_input()
 
@@ -59,11 +62,13 @@ def get_input():
     passwordADSK = password_entry_Autodesk.get()
     emailOutlook = email_entry_Outlook.get()
     passwordOutlook = password_entry_Outlook.get()
+    indice = indice_entry.get()
     user_info = {
       "email Autodesk": emailADSK,
       "password Autodesk": passwordADSK,
       "email Outlook": emailOutlook,
-      "password Outlook": passwordOutlook
+      "password Outlook": passwordOutlook,
+      "indice" : indice
     }
     root.destroy()
     if root.destroy : True 
@@ -161,7 +166,7 @@ def get_input():
 
         reportName = f"Report_{formatted_date_time}.xlsx"
 
-        return reportName
+        return formatted_date_time
 
     timestamp()
 
@@ -281,8 +286,15 @@ def get_input():
             # Save the cropped PDF to the output file
             pdf.save(output_file)
 
-    crop_pdf('test.pdf', 'test2.pdf', 0, 50, 9300, 5000)
+    pdf_Name = f'IPW1 - CALSH DETECTION - #{indice_entry} - {timestamp}.pdf'
 
+    crop_pdf('Test.pdf', pdf_Name, 0, 50, 9300, 5000)
+
+    def remove_test_pdf():
+        os.chdir(Extract)
+        os.remove('test.pdf')
+
+    remove_test_pdf()
 
 root = tk.Tk()
 root.configure(bg='#1d1d1d')
@@ -307,6 +319,7 @@ password_label_Autodesk.pack()
 password_entry_Autodesk = tk.Entry(root, show="*", width= 35)
 password_entry_Autodesk.pack()
 
+
 # Outlook
 
 email_label_Outlook = tk.Label(root, text="Outlook Account Email:", bg='#1d1d1d',fg='white', font="Arial 12")
@@ -320,6 +333,14 @@ password_label_Outlook.pack()
 
 password_entry_Outlook = tk.Entry(root, show="*", width= 35)
 password_entry_Outlook.pack()
+
+# Indice
+
+indice_Label = tk.Label(root, text="Indice du rapport:", bg='#1d1d1d',fg='white', font="Arial 12")
+indice_Label.pack()
+
+indice_entry = tk.Entry(root, width= 35)
+indice_entry.pack()
 
 submit_button = tk.Button(root, text="Submit", command=starting_app, bg='#1d1d1d',fg='white', font="Arial 12",border='0' , padx=10, pady=20)
 submit_button.pack()
