@@ -286,7 +286,7 @@ def get_input():
             # Save the cropped PDF to the output file
             pdf.save(output_file)
 
-    pdf_Name = f'IPW1 - CALSH DETECTION - #{indice_entry} - {timestamp}.pdf'
+    pdf_Name = f'IPW1-CALSH DETECTION-#{indice_entry}-{timestamp()}.pdf'
 
     crop_pdf('Test.pdf', pdf_Name, 0, 50, 9300, 5000)
 
