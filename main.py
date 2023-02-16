@@ -294,7 +294,7 @@ def get_input():
             excel.Quit()
 
     export_pdf()
-
+    
     def crop_pdf(input_file, output_file, left, bottom, right, top):
         os.chdir(Extract)
         # Open input PDF file
@@ -308,7 +308,33 @@ def get_input():
             # Save the cropped PDF to the output file
             pdf.save(output_file)
 
-    crop_pdf('Test.pdf', pdf_Name, 0, 50, 9300, 5000)
+            # final_width = doc_width - 500
+            # final_height = doc_height - 1811.54
+
+
+    def doc_width(input_file):
+        os.chdir(Extract)
+        with fitz.open(input_file) as pdf:
+            page = pdf[0]
+            doc_width = page.mediabox.width
+            final_width = doc_width - 500
+            
+        return final_width
+
+    doc_width('Test.pdf')
+
+    def doc_height(input_file):
+        os.chdir(Extract)
+        with fitz.open(input_file) as pdf:
+            page = pdf[0]
+            doc_height = page.mediabox.height
+            final_height = doc_height - 1811.54
+
+        return final_height
+
+    doc_height('Test.pdf')
+
+    crop_pdf('Test.pdf', pdf_Name, 0, 50, doc_width('Test.pdf'), doc_height('Test.pdf'))
 
     def remove_test_pdf():
         os.chdir(Extract)
