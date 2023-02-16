@@ -119,6 +119,8 @@ def get_input():
 
     print("Connecting to Outlook and downloading report...")
 
+    time.sleep(20)
+
     #Outlook
 
     driver.maximize_window()
