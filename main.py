@@ -33,8 +33,8 @@ def extract_screen_width_height():
     return screen_width, screen_height
 
 screen_width, screen_height = extract_screen_width_height()
-x = (screen_width // 2)-200 
-y = (screen_height // 2)-200
+x = (screen_width // 2)-300 
+y = (screen_height // 2)-300
 
 def starting_app() :
     if email_entry_Autodesk.get() == "" :
@@ -343,7 +343,6 @@ def get_input():
     remove_test_pdf()
 
 
-
 root = tk.Tk()
 root.configure(bg='#1d1d1d')
 root.geometry(f"+{x}+{y}")
@@ -358,13 +357,13 @@ root.title("Login: ")
 email_label_Autodesk = tk.Label(root, text="Autodesk Account Email:", bg='#1d1d1d',fg='white', font="Arial 12")
 email_label_Autodesk.pack()
 
-email_entry_Autodesk = tk.Entry(root, width= 35)
+email_entry_Autodesk = tk.Entry(root, width= 35, justify="center")
 email_entry_Autodesk.pack()
 
 password_label_Autodesk = tk.Label(root, text="Autodesk Account Password:", bg='#1d1d1d',fg='white', font="Arial 12")
 password_label_Autodesk.pack()
 
-password_entry_Autodesk = tk.Entry(root, show="*", width= 35)
+password_entry_Autodesk = tk.Entry(root, show="*", width= 35, justify="center")
 password_entry_Autodesk.pack()
 
 
@@ -373,13 +372,13 @@ password_entry_Autodesk.pack()
 email_label_Outlook = tk.Label(root, text="Outlook Account Email:", bg='#1d1d1d',fg='white', font="Arial 12")
 email_label_Outlook.pack()
 
-email_entry_Outlook = tk.Entry(root, width= 35)
+email_entry_Outlook = tk.Entry(root, width= 35, justify="center")
 email_entry_Outlook.pack()
 
 password_label_Outlook = tk.Label(root, text="Outlook Account Password:", bg='#1d1d1d',fg='white', font="Arial 12")
 password_label_Outlook.pack()
 
-password_entry_Outlook = tk.Entry(root, show="*", width= 35)
+password_entry_Outlook = tk.Entry(root, show="*", width= 35, justify="center")
 password_entry_Outlook.pack()
 
 # Indice
@@ -387,7 +386,7 @@ password_entry_Outlook.pack()
 indice_Label = tk.Label(root, text="Indice du rapport:", bg='#1d1d1d',fg='white', font="Arial 12")
 indice_Label.pack()
 
-indice_entry = tk.Entry(root, width= 35)
+indice_entry = tk.Entry(root, width= 35, justify="center")
 indice_entry.pack()
 
 submit_button = tk.Button(root, text="Submit", command=starting_app, bg='#1d1d1d',fg='white', font="Arial 12",border='0' , padx=10, pady=20)
