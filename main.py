@@ -248,6 +248,7 @@ def get_input():
 
         # Close the workbook and quit Excel Application
         workbook.Close(SaveChanges=True)
+        time.sleep(5)
         excel.Quit()
     
     open_refresh()
