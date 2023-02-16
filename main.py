@@ -162,7 +162,7 @@ def get_input():
         date_time = datetime.fromtimestamp(time_stamp)
         print("The date and time is:", date_time)
 
-        formatted_date_time = date_time.strftime("%Y_%m_%d_%H_%M_%S")
+        formatted_date_time = date_time.strftime("%Y_%m_%d")
 
         reportName = f"Report_{formatted_date_time}.xlsx"
 
