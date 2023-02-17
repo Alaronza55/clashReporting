@@ -87,7 +87,7 @@ def get_input():
     service_obj = Service("WebDrivers_path\chromedriver.exe")
     driver = webdriver.Chrome(service=service_obj)
 
-    driver.maximize_window()
+    # driver.maximize_window()
     driver.get("https://docs.b360.autodesk.com/projects/fdf9236c-9b37-4092-8f87-25f1929658e4/issues")
     time.sleep(40)
 
@@ -123,7 +123,7 @@ def get_input():
 
     #Outlook
 
-    driver.maximize_window()
+    # driver.maximize_window()
     driver.get("https://outlook.office365.com/mail/AAMkADNjMDFhMDljLTcxNDItNDU1My04ZWJkLWE3MjY3YzQyMWE4NgAuAAAAAABtZmj7uFKxTJUDw1rK%2B2UaAQClX%2BsphslyRLVqrG8fet%2FsAAAQ6hlfAAA%3D")
     time.sleep(40)
 
@@ -314,34 +314,11 @@ def get_input():
             # final_width = doc_width - 500
             # final_height = doc_height - 1811.54
 
-
-    def doc_width(input_file):
-        os.chdir(Extract)
-        with fitz.open(input_file) as pdf:
-            page = pdf[0]
-            doc_width = page.mediabox.width
-            final_width = doc_width - 500
-            
-        return final_width
-
-    doc_width('Test.pdf')
-
-    def doc_height(input_file):
-        os.chdir(Extract)
-        with fitz.open(input_file) as pdf:
-            page = pdf[0]
-            doc_height = page.mediabox.height
-            final_height = doc_height - 1811.54
-
-        return final_height
-
-    doc_height('Test.pdf')
-
-    crop_pdf('Test.pdf', pdf_Name, 0, 50, doc_width('Test.pdf'), doc_height('Test.pdf'))
+    crop_pdf('Test.pdf', pdf_Name, 0, 50, 0, 5000)
 
     def remove_test_pdf():
         os.chdir(Extract)
-        os.remove('test.pdf')
+        os.remove('Test.pdf')
 
     remove_test_pdf()
 
