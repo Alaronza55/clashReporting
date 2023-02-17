@@ -254,7 +254,7 @@ def get_input():
     open_refresh()
 
     pdf_Name = f'IPW1-CALSH DETECTION-#{indice}-{timestamp()}.pdf' 
-
+    
     def rename_header_excel():
         # Open Excel Application
         excel = win32.gencache.EnsureDispatch('Excel.Application')
@@ -298,6 +298,21 @@ def get_input():
 
     export_pdf()
     
+    class PDF :
+        def __init__(self) -> None:
+            self.input_file = r'C:\Users\ADavidson\Documents\Extract\Test.pdf'
+            self.pdf = fitz.open(self.input_file)
+            self.page = self.pdf[0]
+            self.width = self.page.mediabox.width
+            self.height = self.page.mediabox.height
+            self.final_width = round(self.width - 800)
+            self.final_height = round(self.height - 4000)
+
+    def return_PDF():
+        return PDF()
+
+    Dimensions=return_PDF()
+
     def crop_pdf(input_file, output_file, left, bottom, right, top):
         os.chdir(Extract)
         # Open input PDF file
@@ -311,10 +326,7 @@ def get_input():
             # Save the cropped PDF to the output file
             pdf.save(output_file)
 
-            # final_width = doc_width - 500
-            # final_height = doc_height - 1811.54
-
-    crop_pdf('Test.pdf', pdf_Name, 0, 50, 0, 5000)
+    crop_pdf('Test.pdf', pdf_Name,0, 80, Dimensions.final_width, Dimensions.final_height)
 
     def remove_test_pdf():
         os.chdir(Extract)
