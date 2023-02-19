@@ -27,6 +27,16 @@ Documents=(f'{USERS}\Documents')
 Extract = (f'{Documents}\{FOLDERNAME}')
 REPORT = "REPORT.xlsx"
 
+class PDF :
+    def __init__(self) -> None:
+        self.input_file = f'{Extract}\Test.pdf'
+        self.pdf = fitz.open(self.input_file)
+        self.page = self.pdf[0]
+        self.width = self.page.mediabox.width
+        self.height = self.page.mediabox.height
+        self.final_width = round(self.width - 800)
+        self.final_height = round(self.height - 4000)
+
 #Get screen size
 def extract_screen_width_height():
     screen_width, screen_height = pyautogui.size()
@@ -239,7 +249,7 @@ def get_input():
         excel = win32.gencache.EnsureDispatch('Excel.Application')
 
         # Open the workbook
-        workbook = excel.Workbooks.Open('C:\\Users\\ADavidson\\Documents\\Extract\\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx')
+        workbook = excel.Workbooks.Open(f'{Extract}\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx')
 
         # Refresh all data connections
         workbook.RefreshAll()
@@ -260,7 +270,7 @@ def get_input():
         excel = win32.gencache.EnsureDispatch('Excel.Application')
 
         # Open the workbook
-        workbook = excel.Workbooks.Open('C:\\Users\\ADavidson\\Documents\\Extract\\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx')
+        workbook = excel.Workbooks.Open(f'{Extract}\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx')
 
         excel.Visible = False
 
@@ -275,9 +285,9 @@ def get_input():
 
     def export_pdf():
         # Path to original excel file
-        WB_PATH = r'C:\Users\ADavidson\Documents\Extract\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx'
+        WB_PATH = f'{Documents}\Extract\IPW1 - TEMPLATE - CLASH DETECTION_V65.xlsx'
         # PDF path when saving
-        PATH_TO_PDF = r'C:\Users\ADavidson\Documents\Extract\Test.pdf'
+        PATH_TO_PDF = f'{Documents}\Extract\Test.pdf'
         excel = win32com.client.Dispatch("Excel.Application")
         excel.Visible = False
         try:
@@ -297,16 +307,6 @@ def get_input():
             excel.Quit()
 
     export_pdf()
-    
-    class PDF :
-        def __init__(self) -> None:
-            self.input_file = r'C:\Users\ADavidson\Documents\Extract\Test.pdf'
-            self.pdf = fitz.open(self.input_file)
-            self.page = self.pdf[0]
-            self.width = self.page.mediabox.width
-            self.height = self.page.mediabox.height
-            self.final_width = round(self.width - 800)
-            self.final_height = round(self.height - 4000)
 
     def return_PDF():
         return PDF()

@@ -7,3 +7,4 @@ webdriver-manager==3.8.4
 PyAutoGUI==0.9.53
 pywin32==305
 PyMuPDF==1.21.1
+pypiwin32==223
