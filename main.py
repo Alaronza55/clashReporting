@@ -37,6 +37,42 @@ class PDF :
         self.final_width = round(self.width - 800)
         self.final_height = round(self.height - 4000)
 
+class xy :
+    def __init__(self) -> None:
+        # Open the PDF file
+        pdf_file = f'{Extract}\Test.pdf'
+        doc = fitz.open(pdf_file)
+
+        # Select the page to analyze
+        page_num = 0
+        page = doc[page_num]
+
+        # Define the color to look for
+        target_color = (255, 0, 0)  # red color in RGB format
+
+        # Get the pixmap for the page
+        pixmap = page.get_pixmap()
+
+        # Find the first occurrence of the target color
+        found = False
+        for x in range(pixmap.width):
+            for y in range(pixmap.height):
+                pixel_color = pixmap.pixel(x, y)
+                if pixel_color == target_color:
+                    found = True
+                    break
+            if found:
+                break
+
+        # Extract the x and y positions
+        if found:
+            self.x_pos = x
+            self.y_pos = y
+
+            print(f"Found target color at position ({self.x_pos}, {self.y_pos})")
+        else:
+            print(f"Target color not found on page {page_num}")
+
 #Get screen size
 def extract_screen_width_height():
     screen_width, screen_height = pyautogui.size()
@@ -312,6 +348,11 @@ def get_input():
         return PDF()
 
     Dimensions=return_PDF()
+    
+    def return_XY():
+        return xy()
+    
+    fpixel = return_XY()
 
     def crop_pdf(input_file, output_file, left, bottom, right, top):
         os.chdir(Extract)
@@ -326,7 +367,7 @@ def get_input():
             # Save the cropped PDF to the output file
             pdf.save(output_file)
 
-    crop_pdf('Test.pdf', pdf_Name,0, 80, Dimensions.final_width, Dimensions.final_height)
+    crop_pdf('Test.pdf', 'Test2.pdf',0, 80, fpixel.x_pos, fpixel.y_pos)
 
     def remove_test_pdf():
         os.chdir(Extract)
