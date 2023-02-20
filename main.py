@@ -300,6 +300,7 @@ def get_input():
     open_refresh()
 
     pdf_Name = f'IPW1-CALSH DETECTION-#{indice}-{timestamp()}.pdf' 
+    header_Name = f'IPW1-CALSH DETECTION-#{indice}-{timestamp()}' 
     
     def rename_header_excel():
         # Open Excel Application
@@ -312,7 +313,7 @@ def get_input():
 
         ws = workbook.Worksheets('PVT CHART')
 
-        ws.Cells(1,2).Value = (pdf_Name)
+        ws.Cells(1,2).Value = (header_Name)
 
         workbook.Close(SaveChanges=True)
         excel.Quit()
