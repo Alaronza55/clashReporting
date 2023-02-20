@@ -367,7 +367,9 @@ def get_input():
             # Save the cropped PDF to the output file
             pdf.save(output_file)
 
-    crop_pdf('Test.pdf', 'Test2.pdf',0, 80, fpixel.x_pos, fpixel.y_pos)
+    crop_pdf('Test.pdf', pdf_Name,0, 80, fpixel.x_pos, fpixel.y_pos)
+
+    time.sleep(15)
 
     def remove_test_pdf():
         os.chdir(Extract)
