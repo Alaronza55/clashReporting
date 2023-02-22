@@ -159,7 +159,7 @@ def get_input():
 
     #Outlook
 
-    driver.maximize_window()
+    # driver.maximize_window()
     driver.get("https://outlook.office365.com/mail/AAMkADNjMDFhMDljLTcxNDItNDU1My04ZWJkLWE3MjY3YzQyMWE4NgAuAAAAAABtZmj7uFKxTJUDw1rK%2B2UaAQClX%2BsphslyRLVqrG8fet%2FsAAAQ6hlfAAA%3D")
     time.sleep(40)
 
