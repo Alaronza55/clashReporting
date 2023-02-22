@@ -27,16 +27,6 @@ Documents=(f'{USERS}\Documents')
 Extract = (f'{Documents}\{FOLDERNAME}')
 REPORT = "REPORT.xlsx"
 
-class PDF :
-    def __init__(self) -> None:
-        self.input_file = f'{Extract}\Test.pdf'
-        self.pdf = fitz.open(self.input_file)
-        self.page = self.pdf[0]
-        self.width = self.page.mediabox.width
-        self.height = self.page.mediabox.height
-        self.final_width = round(self.width - 800)
-        self.final_height = round(self.height - 4000)
-
 class xy :
     def __init__(self) -> None:
         # Open the PDF file
@@ -169,7 +159,7 @@ def get_input():
 
     #Outlook
 
-    # driver.maximize_window()
+    driver.maximize_window()
     driver.get("https://outlook.office365.com/mail/AAMkADNjMDFhMDljLTcxNDItNDU1My04ZWJkLWE3MjY3YzQyMWE4NgAuAAAAAABtZmj7uFKxTJUDw1rK%2B2UaAQClX%2BsphslyRLVqrG8fet%2FsAAAQ6hlfAAA%3D")
     time.sleep(40)
 
@@ -186,7 +176,7 @@ def get_input():
     time.sleep(20)
 
     driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[1]/div/div/div/div/div[3]/div[16]/div').click()
-    time.sleep(5)
+    time.sleep(5) 
     driver.find_element(By.XPATH, '/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div/div/div[3]/div/div[3]/div[1]/div[2]/div/div/div/div/div/div[1]/div/div/div[1]/div[1]/div').click()
     time.sleep(20)
 
@@ -276,7 +266,7 @@ def get_input():
 
         print("Operation completed. You can now close the program. Thank you come again!")
 
-        msgbox.showinfo("User Info", "File has been saved in : " f'{Extract}')
+        # msgbox.showinfo("User Info", "File has been saved in : " f'{Extract}')
 
     deleting_Temp_XXX()
 
@@ -344,11 +334,6 @@ def get_input():
             excel.Quit()
 
     export_pdf()
-
-    def return_PDF():
-        return PDF()
-
-    Dimensions=return_PDF()
     
     def return_XY():
         return xy()
@@ -371,12 +356,6 @@ def get_input():
     crop_pdf('Test.pdf', pdf_Name,0, 80, fpixel.x_pos, fpixel.y_pos)
 
     time.sleep(15)
-
-    def remove_test_pdf():
-        os.chdir(Extract)
-        os.remove('Test.pdf')
-
-    remove_test_pdf()
 
 
 root = tk.Tk()
@@ -428,5 +407,11 @@ submit_button = tk.Button(root, text="Submit", command=starting_app, bg='#1d1d1d
 submit_button.pack()
 
 root.mainloop()
+
+# def remove_test_pdf():
+#     os.chdir(Extract)
+#     os.remove('Test.pdf')
+
+# remove_test_pdf()
 
 time.sleep(30)
