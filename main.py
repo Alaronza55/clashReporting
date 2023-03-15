@@ -15,6 +15,7 @@ import win32com.client as win32
 from pywintypes import com_error
 import win32com.client
 import fitz
+import shutil
 
 #Variables
 FILENAME = "XXX"
@@ -123,7 +124,7 @@ def get_input():
     service_obj = Service("WebDrivers_path\chromedriver.exe")
     driver = webdriver.Chrome(service=service_obj)
 
-    # driver.maximize_window()
+    driver.maximize_window()
     driver.get("https://docs.b360.autodesk.com/projects/fdf9236c-9b37-4092-8f87-25f1929658e4/issues")
     time.sleep(40)
 
@@ -159,7 +160,7 @@ def get_input():
 
     #Outlook
 
-    # driver.maximize_window()
+    driver.maximize_window()
     driver.get("https://outlook.office365.com/mail/AAMkADNjMDFhMDljLTcxNDItNDU1My04ZWJkLWE3MjY3YzQyMWE4NgAuAAAAAABtZmj7uFKxTJUDw1rK%2B2UaAQClX%2BsphslyRLVqrG8fet%2FsAAAQ6hlfAAA%3D")
     time.sleep(40)
 
@@ -190,6 +191,27 @@ def get_input():
     driver.get(x)
 
     time.sleep(30)
+
+    def remove_win32genpy() :
+
+        path = win32com.__gen_path__
+
+        os.chdir(path)
+
+        listing = os.listdir()
+
+        first_element = listing[0]
+        # print(first_element)
+
+        full_path = f'{path}\{first_element}'
+
+        try:
+            shutil.rmtree(full_path)
+            print(f"Directory '{full_path}' has been successfully deleted along with its contents.")
+        except OSError as e:
+            print(f"Error: {e.filename} - {e.strerror}.")
+
+    remove_win32genpy()
 
     def timestamp() :
         current_GMT = time.gmtime()
